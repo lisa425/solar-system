@@ -11,7 +11,7 @@ export default class Earth extends Planet {
 
   createPlanetLights() {
     const planetLightsMaterial = new MeshBasicMaterial({
-      map: this.loader.load('/assets/earthmap.jpg'),
+      map: this.loader.load('/assets/map/earthmap.jpg'),
       blending: AdditiveBlending,
     })
     const planetLightsMesh = new Mesh(this.planetGeometry, planetLightsMaterial)
@@ -22,11 +22,11 @@ export default class Earth extends Planet {
 
   createPlanetClouds() {
     const planetCloudsMaterial = new MeshStandardMaterial({
-      map: this.loader.load('/assets/earthmap.jpg'),
+      map: this.loader.load('/assets/map/earthmap.jpg'),
       transparent: true,
       opacity: 0.8,
       blending: AdditiveBlending,
-      alphaMap: this.loader.load('/assets/earthmap.jpg'),
+      alphaMap: this.loader.load('/assets/map/earthmap.jpg'),
     })
     const planetCloudsMesh = new Mesh(this.planetGeometry, planetCloudsMaterial)
     planetCloudsMesh.scale.setScalar(1.003)

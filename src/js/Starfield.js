@@ -51,7 +51,7 @@ export default class Starfield {
       transparent: true,
       vertexColors: true,
       blending: AdditiveBlending,
-      map: this.loader.load('/assets/starmap.png'),
+      map: this.loader.load('/assets/map/starmap.png'),
     })
     const points = new Points(geo, mat)
     this.group.add(points)

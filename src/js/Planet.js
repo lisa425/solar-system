@@ -22,7 +22,7 @@ export default class Planet {
   planetGeometry
 
   constructor({
-    label = 'sun',
+    label = 'mercury',
     orbitSpeed = 1,
     orbitColor = 0xaae0f2,
     orbitRadius = 1,
@@ -32,7 +32,7 @@ export default class Planet {
     planetAngle = 0,
     planetRotationSpeed = 1,
     planetRotationDirection = 'clockwise',
-    planetTexture = '/assets/mercury-map.jpg',
+    planetTexture = '/assets/map/mercurymap.jpg',
 
     rimHex = 0x0088ff,
     facingHex = 0x000000,
@@ -70,7 +70,7 @@ export default class Planet {
   createOrbit() {
     const orbitGeometry = new TorusGeometry(this.orbitRadius, 0.003, 100)
     const orbitMaterial = new MeshBasicMaterial({
-      color: '0x333333',
+      color: this.orbitColor,
       side: DoubleSide,
       opacity: 0.7,
       transparent: true,
@@ -92,15 +92,16 @@ export default class Planet {
     this.planetGroup.position.x = this.orbitRadius - this.planetSize / 9
     this.planetGroup.rotation.z = this.planetAngle
     this.group.add(this.planetGroup)
+    this.group.name = this.label
   }
 
   createGlow(rimHex, facingHex) {
     const uniforms = {
       color1: { value: new Color(rimHex) },
       color2: { value: new Color(facingHex) },
-      fresnelBias: { value: 0.2 },
-      fresnelScale: { value: 1.2 },
-      fresnelPower: { value: 4.0 },
+      fresnelBias: { value: 0.1 },
+      fresnelScale: { value: 1.3 },
+      fresnelPower: { value: 3.0 },
     }
 
     const vertexShader = `
@@ -207,7 +208,7 @@ export const planetInfo = [
     planetSize: 0.2,
     planetRotationSpeed: 0.005,
     planetRotationDirection: 'counterclockwise',
-    planetTexture: '/assets/mercurymap.jpg',
+    planetTexture: '/assets/map/mercurymap.jpg',
     rimHex: 0xf9cf9f,
   },
   {
@@ -219,7 +220,7 @@ export const planetInfo = [
     planetSize: 0.5,
     planetRotationSpeed: 0.0005,
     planetRotationDirection: 'clockwise',
-    planetTexture: '/assets/venusmap.jpg',
+    planetTexture: '/assets/map/venusmap.jpg',
     rimHex: 0xb66f1f,
   },
   {
@@ -232,7 +233,7 @@ export const planetInfo = [
     planetAngle: (-23.4 * Math.PI) / 180,
     planetRotationSpeed: 0.01,
     planetRotationDirection: 'counterclockwise',
-    planetTexture: '/assets/earthmap.jpg',
+    planetTexture: '/assets/map/earthmap.jpg',
   },
   {
     label: 'mars',
@@ -243,7 +244,7 @@ export const planetInfo = [
     planetSize: 0.3,
     planetRotationSpeed: 0.01,
     planetRotationDirection: 'counterclockwise',
-    planetTexture: '/assets/marsmap.jpg',
+    planetTexture: '/assets/map/marsmap.jpg',
     rimHex: 0xbc6434,
   },
   {
@@ -255,7 +256,7 @@ export const planetInfo = [
     planetSize: 1,
     planetRotationSpeed: 0.06,
     planetRotationDirection: 'counterclockwise',
-    planetTexture: '/assets/jupitermap.jpg',
+    planetTexture: '/assets/map/jupitermap.jpg',
     rimHex: 0xf3d6b6,
   },
   {
@@ -267,11 +268,11 @@ export const planetInfo = [
     planetSize: 0.8,
     planetRotationSpeed: 0.05,
     planetRotationDirection: 'counterclockwise',
-    planetTexture: '/assets/saturnmap.jpg',
+    planetTexture: '/assets/map/saturnmap.jpg',
     rimHex: 0xd6b892,
     rings: {
       ringsSize: 0.5,
-      ringsTexture: '/assets/saturnringmap.png',
+      ringsTexture: '/assets/map/saturnringmap.png',
     },
   },
   {
@@ -283,11 +284,11 @@ export const planetInfo = [
     planetSize: 0.5,
     planetRotationSpeed: 0.02,
     planetRotationDirection: 'clockwise',
-    planetTexture: '/assets/uranusmap.jpg',
+    planetTexture: '/assets/map/uranusmap.jpg',
     rimHex: 0x9ab6c2,
     rings: {
       ringsSize: 0.4,
-      ringsTexture: '/assets/uranusringmap.png',
+      ringsTexture: '/assets/map/uranusringmap.png',
     },
   },
   {
@@ -299,7 +300,7 @@ export const planetInfo = [
     planetSize: 0.5,
     planetRotationSpeed: 0.02,
     planetRotationDirection: 'counterclockwise',
-    planetTexture: '/assets/neptunemap.jpg',
+    planetTexture: '/assets/map/neptunemap.jpg',
     rimHex: 0x5c7ed7,
   },
 ]

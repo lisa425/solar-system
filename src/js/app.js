@@ -3,6 +3,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import Sun from './Sun'
 import Starfield from './Starfield'
 import Planet, { planetInfo } from './Planet'
+import gsap from 'gsap'
 
 export default function () {
   const renderer = new THREE.WebGLRenderer({ antialias: true })
@@ -14,6 +15,7 @@ export default function () {
   }
 
   const scene = new THREE.Scene()
+
   const camera = new THREE.PerspectiveCamera(75, canvasSize.width / canvasSize.height, 0.1, 100)
   camera.position.set(0, 5, 40)
 
@@ -33,19 +35,9 @@ export default function () {
 
   const raycaster = new THREE.Raycaster()
   const mouse = new THREE.Vector2()
-
-  const onMouseMove = (event) => {
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1
-    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1
-
-    const intersects = raycaster.intersectObjects(scene.children)
-    for (let i = 0; i < intersects.length; i++) {
-      const selectedPlanet = intersects[i].object
-      if (selectedPlanet.name !== '') {
-        // selectedPlanet.scale.set(1.1, 1.1, 1.1)
-      }
-    }
-  }
+  let intersects
+  let currentIntersect = null
+  let planetsAndSunMeshes = []
 
   const addLight = () => {
     const light = new THREE.DirectionalLight(0xffffff)
@@ -58,17 +50,27 @@ export default function () {
     const sun = new Sun().getSun()
     const starfield = new Starfield().getStarfield()
 
-    solarSystemGroup.add(sun, starfield)
+    solarSystemGroup.name = 'solar-system'
+    solarSystemGroup.add(sun)
+
+    // 태양 메쉬 추가
+    const sunMesh = sun.children.find((child) => child.name === 'sun')
+    if (sunMesh) planetsAndSunMeshes.push(sunMesh)
 
     planetInfo.forEach((item) => {
       const planet = new Planet(item).getPlanet()
       solarSystemGroup.add(planet)
+
+      const planetMesh = planet.children[1].children.find((child) => child.name === item.label)
+      if (planetMesh) planetsAndSunMeshes.push(planetMesh)
     })
 
     solarSystemGroup.position.set(0, 0, 0)
     solarSystemGroup.rotation.set(0.3, -1.1, 0.3)
 
-    scene.add(solarSystemGroup)
+    scene.add(solarSystemGroup, starfield)
+
+    return { solarSystemGroup, planetsAndSunMeshes }
   }
 
   const resize = () => {
@@ -82,10 +84,59 @@ export default function () {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
   }
 
+  const highlightMesh = (mesh) => {
+    if (mesh.material) {
+      mesh.material.emissive.set(0xfaee11) // 하이라이트 색상으로 설정
+      mesh.material.emissiveIntensity = 0.05
+    }
+  }
+
+  const unhighlightMesh = (mesh) => {
+    if (mesh.material) {
+      mesh.material.emissive.set(0x000000) // 원래 상태로 되돌림
+      mesh.material.emissiveIntensity = 1
+    }
+  }
+
+  const onMouseMove = (event) => {
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1
+
+    intersects = raycaster.intersectObjects(planetsAndSunMeshes)
+
+    if (intersects.length > 0) {
+      if (!currentIntersect) {
+        console.log('mouse enter')
+        highlightMesh(intersects[0].object)
+      }
+      currentIntersect = intersects[0]
+    } else {
+      if (currentIntersect) {
+        console.log('mouse leave')
+        unhighlightMesh(currentIntersect.object)
+      }
+
+      currentIntersect = null
+    }
+  }
+
+  const clickPlanet = (event) => {
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1
+    mouse.y = -(event.clientY / window.innerHeight) * 2 + 1
+
+    raycaster.setFromCamera(mouse, camera)
+
+    if (intersects.length > 0) {
+      const clickedObject = intersects[0].object
+      console.log(`Clicked on planet: ${clickedObject.name}`)
+    }
+  }
+
   const addEvent = () => {
     window.addEventListener('resize', resize)
     document.querySelector('.btn-close').addEventListener('click', toggleInfo)
-    // window.addEventListener('mousemove', onMouseMove)
+    window.addEventListener('mousemove', onMouseMove)
+    window.addEventListener('click', clickPlanet)
   }
 
   const draw = () => {

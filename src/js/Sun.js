@@ -25,7 +25,7 @@ export default class Sun {
   glow
 
   constructor() {
-    this.sunTexture = 'assets/sunmap.jpg'
+    this.sunTexture = '/assets/map/sunmap.jpg'
     this.group = new Group()
     this.loader = new TextureLoader()
 
@@ -54,6 +54,8 @@ export default class Sun {
     this.group.add(this.corona)
 
     this.group.add(this.glow)
+
+    this.group.name = 'sun'
 
     this.group.userData.update = (t) => {
       this.group.rotation.y = -t / 5
