@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import Sun from './Sun'
 import Starfield from './Starfield'
-import Planet, { planetInfo } from './Planet'
+import Planet, { planetInfo, planetContent } from './Planet'
 import gsap from 'gsap'
 
 export default function () {
@@ -66,7 +66,7 @@ export default function () {
     })
 
     solarSystemGroup.position.set(0, 0, 0)
-    solarSystemGroup.rotation.set(0.3, -1.1, 0.3)
+    solarSystemGroup.rotation.set(0, -2, 0)
 
     scene.add(solarSystemGroup, starfield)
 
@@ -86,7 +86,7 @@ export default function () {
 
   const highlightMesh = (mesh) => {
     if (mesh.material) {
-      mesh.material.emissive.set(0xfaee11) // 하이라이트 색상으로 설정
+      mesh.material.emissive.set(0xffffff) // 하이라이트 색상으로 설정
       mesh.material.emissiveIntensity = 0.05
     }
   }
@@ -106,18 +106,30 @@ export default function () {
 
     if (intersects.length > 0) {
       if (!currentIntersect) {
-        console.log('mouse enter')
         highlightMesh(intersects[0].object)
       }
       currentIntersect = intersects[0]
     } else {
       if (currentIntersect) {
-        console.log('mouse leave')
         unhighlightMesh(currentIntersect.object)
       }
 
       currentIntersect = null
     }
+  }
+
+  const changeContent = (planetName) => {
+    const infoBox = document.getElementById('info-box')
+    const title = infoBox.querySelector('.title')
+    const desc = infoBox.querySelector('.desc')
+    infoBox.className = 'info-box'
+    title.textContent = planetContent[planetName].title
+    desc.textContent = planetContent[planetName].desc
+
+    gsap
+      .timeline()
+      .from(title, { opacity: 0, y: 10, duration: 0.5, ease: 'circ.out', delay: 0.2 })
+      .from(desc, { opacity: 0, y: 30, duration: 0.5, ease: 'circ.out' }, '<0.1')
   }
 
   const clickPlanet = (event) => {
@@ -128,7 +140,7 @@ export default function () {
 
     if (intersects.length > 0) {
       const clickedObject = intersects[0].object
-      console.log(`Clicked on planet: ${clickedObject.name}`)
+      changeContent(clickedObject.name)
     }
   }
 
@@ -159,12 +171,38 @@ export default function () {
     }
   }
 
+  const introAnimation = () => {
+    gsap.from(camera.position, {
+      y: 20,
+      x: 50,
+      z: 50,
+      duration: 8,
+      ease: 'elastic.out(1,10000)',
+    })
+    gsap
+      .timeline()
+      .from('.main-title h1', {
+        opacity: 0,
+        duration: 2,
+        y: 30,
+      })
+      .from(
+        '.main-title p',
+        {
+          opacity: 0,
+          duration: 2,
+          y: 30,
+        },
+        '<0.5'
+      )
+  }
   const initialize = () => {
     create()
     addLight()
     addEvent()
     resize()
     draw()
+    introAnimation()
   }
 
   initialize()
