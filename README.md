@@ -1,6 +1,6 @@
 # three.js Solar System Information
 
-> Demo: https://~~~
+> Demo: https://three-solar-system-gamma.vercel.app/
 
 ### Tech Stack
 
@@ -12,8 +12,10 @@
 ### reference
 
 > https://threesolar.netlify.app/
-> https://science.nasa.gov/solar-system/
-> https://science.nasa.gov/solar-system/
+
+https://science.nasa.gov/solar-system/
+
+https://science.nasa.gov/solar-system/
 
 #### TODO
 
