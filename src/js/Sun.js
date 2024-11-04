@@ -24,10 +24,10 @@ export default class Sun {
   sunRim
   glow
 
-  constructor() {
+  constructor(loadingManager) {
     this.sunTexture = '/assets/map/sunmap.jpg'
     this.group = new Group()
-    this.loader = new TextureLoader()
+    this.loader = new TextureLoader(loadingManager)
 
     this.createCorona()
     this.createRim()

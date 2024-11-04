@@ -6,6 +6,24 @@ import Planet, { planetInfo, planetContent } from './Planet'
 import gsap from 'gsap'
 
 export default function () {
+  const loadingManager = new THREE.LoadingManager()
+  loadingManager.onProgress = (_, itemsLoaded, itemsTotal) => {
+    const progress = (itemsLoaded / itemsTotal) * 100
+    document.getElementById('loading-bar').style.width = progress + '%'
+  }
+
+  loadingManager.onLoad = () => {
+    gsap.to('#wrapper', { opacity: 1, duration: 1, ease: 'elastic.out(1,1000)' })
+    gsap.to('#loading-bar-container', {
+      opacity: 0,
+      duration: 0.5,
+      ease: 'circ.out',
+      onComplete: () => {
+        document.getElementById('loading-bar-container').style.display = 'none'
+      },
+    })
+  }
+
   const renderer = new THREE.WebGLRenderer({ antialias: true })
   const container = document.querySelector('#app')
   container.appendChild(renderer.domElement)
@@ -47,7 +65,7 @@ export default function () {
 
   const create = () => {
     const solarSystemGroup = new THREE.Group()
-    const sun = new Sun().getSun()
+    const sun = new Sun(loadingManager).getSun()
     const starfield = new Starfield().getStarfield()
 
     solarSystemGroup.name = 'solar-system'
@@ -58,7 +76,7 @@ export default function () {
     if (sunMesh) planetsAndSunMeshes.push(sunMesh)
 
     planetInfo.forEach((item) => {
-      const planet = new Planet(item).getPlanet()
+      const planet = new Planet(item, loadingManager).getPlanet()
       solarSystemGroup.add(planet)
 
       const planetMesh = planet.children[1].children.find((child) => child.name === item.label)

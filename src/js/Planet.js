@@ -21,24 +21,27 @@ export default class Planet {
   planetGroup
   planetGeometry
 
-  constructor({
-    label = 'mercury',
-    orbitSpeed = 1,
-    orbitColor = 0xaae0f2,
-    orbitRadius = 1,
-    orbitRotationDirection = 'clockwise',
+  constructor(
+    {
+      label = 'mercury',
+      orbitSpeed = 1,
+      orbitColor = 0xaae0f2,
+      orbitRadius = 1,
+      orbitRotationDirection = 'clockwise',
 
-    planetSize = 1,
-    planetAngle = 0,
-    planetRotationSpeed = 1,
-    planetRotationDirection = 'clockwise',
-    planetTexture = '/assets/map/mercurymap.jpg',
+      planetSize = 1,
+      planetAngle = 0,
+      planetRotationSpeed = 1,
+      planetRotationDirection = 'clockwise',
+      planetTexture = '/assets/map/mercurymap.jpg',
 
-    rimHex = 0x0088ff,
-    facingHex = 0x000000,
+      rimHex = 0x0088ff,
+      facingHex = 0x000000,
 
-    rings = null,
-  } = {}) {
+      rings = null,
+    } = {},
+    loadingManager
+  ) {
     this.label = label
     this.orbitSpeed = orbitSpeed
     this.orbitColor = orbitColor
@@ -55,7 +58,7 @@ export default class Planet {
 
     this.group = new Group()
     this.planetGroup = new Group()
-    this.loader = new TextureLoader()
+    this.loader = new TextureLoader(loadingManager)
     this.planetGeometry = new IcosahedronGeometry(this.planetSize, 12)
 
     this.createOrbit()

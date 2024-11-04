@@ -7,34 +7,40 @@
     <title>The Solar System</title>
   </head>
   <body>
-    <div class="main-title">
-      <h1>The Solar System</h1>
-      <p>
-        The Solar System is the gravitationally bound system<br>
-        of the Sun and the objects that orbit it.
-      </p>
-    </div>
-    
-    <div class="info-box close" id="info-box">
-      <button type="button" class="btn-close"> 
-        <img src="/assets/img/close.svg" alt="sun">
-      </button>
-      <div class="title">mercury</div>
-      <hr>
-      <div class="desc">
-        <p>The Sun is the star at the center of the Solar System.</p>
-        <p>It is a massive, nearly perfect sphere of hot plasma, heated to incandescence by nuclear fusion reactions in its core,
-          radiating the energy from its surface mainly as visible light and infrared radiation with 10% at ultraviolet energies.
-        </p>
-        <p>It is by far the most important source of energy for life on Earth.
-          The Sun has been an object of veneration in many cultures.
-          It has been a central subject for astronomical research since antiquity.
+    <div id="wrapper">
+      <div class="main-title">
+        <h1>The Solar System</h1>
+        <p>
+          The Solar System is the gravitationally bound system<br>
+          of the Sun and the objects that orbit it.
         </p>
       </div>
-      <img src="/assets/img/sun.jpg" alt="sun" class="planet-img">
-    </div>
+      
+      <div class="info-box close" id="info-box">
+        <button type="button" class="btn-close"> 
+          <img src="/assets/img/close.svg" alt="sun">
+        </button>
+        <div class="title">mercury</div>
+        <hr>
+        <div class="desc">
+          <p>The Sun is the star at the center of the Solar System.</p>
+          <p>It is a massive, nearly perfect sphere of hot plasma, heated to incandescence by nuclear fusion reactions in its core,
+            radiating the energy from its surface mainly as visible light and infrared radiation with 10% at ultraviolet energies.
+          </p>
+          <p>It is by far the most important source of energy for life on Earth.
+            The Sun has been an object of veneration in many cultures.
+            It has been a central subject for astronomical research since antiquity.
+          </p>
+        </div>
+        <img src="/assets/img/sun.jpg" alt="sun" class="planet-img">
+      </div>
 
-    <div id="app"></div>
+      <div id="app"></div>
+    </div>
+    <div id="loading-bar-container">
+      <div id="loading-bar"></div>
+      <p>Loading...</p>
+    </div>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
