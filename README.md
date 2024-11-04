@@ -1,4 +1,4 @@
-# three.js 태양계 시스템
+# three.js Solar System Information
 
 > Demo: https://~~~
 
@@ -12,10 +12,8 @@
 ### reference
 
 > https://threesolar.netlify.app/
-
 > https://science.nasa.gov/solar-system/
-
-> https://dev.to/cookiemonsterdev/solar-system-with-threejs-3fe0
+> https://science.nasa.gov/solar-system/
 
 #### TODO
 
