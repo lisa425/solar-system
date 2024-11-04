@@ -71,7 +71,6 @@ export default function () {
     solarSystemGroup.name = 'solar-system'
     solarSystemGroup.add(sun)
 
-    // 태양 메쉬 추가
     const sunMesh = sun.children.find((child) => child.name === 'sun')
     if (sunMesh) planetsAndSunMeshes.push(sunMesh)
 
@@ -104,14 +103,14 @@ export default function () {
 
   const highlightMesh = (mesh) => {
     if (mesh.material) {
-      mesh.material.emissive.set(0xffffff) // 하이라이트 색상으로 설정
+      mesh.material.emissive.set(0xffffff)
       mesh.material.emissiveIntensity = 0.05
     }
   }
 
   const unhighlightMesh = (mesh) => {
     if (mesh.material) {
-      mesh.material.emissive.set(0x000000) // 원래 상태로 되돌림
+      mesh.material.emissive.set(0x000000)
       mesh.material.emissiveIntensity = 1
     }
   }
@@ -141,16 +140,19 @@ export default function () {
     const title = infoBox.querySelector('.title')
     const desc = infoBox.querySelector('.desc')
     const img = infoBox.querySelector('.planet-img')
-    infoBox.className = 'info-box'
-    title.textContent = planetContent[planetName].title
-    desc.textContent = planetContent[planetName].desc
+
     img.src = `/assets/img/${planetName}.jpg`
     img.setAttribute('alt', planetName)
-    gsap
-      .timeline()
-      .from(title, { opacity: 0, y: 10, duration: 0.5, ease: 'circ.out', delay: 0.2 })
-      .from(desc, { opacity: 0, y: 30, duration: 0.5, ease: 'circ.out' }, '<0.1')
-      .from(img, { opacity: 0, duration: 0.5, ease: 'circ.out' }, '<')
+    img.onload = () => {
+      infoBox.className = 'info-box'
+      title.textContent = planetContent[planetName].title
+      desc.textContent = planetContent[planetName].desc
+      gsap
+        .timeline()
+        .from(title, { opacity: 0, y: 10, duration: 0.5, ease: 'circ.out', delay: 0.2 })
+        .from(desc, { opacity: 0, y: 30, duration: 0.5, ease: 'circ.out' }, '<0.1')
+        .from(img, { opacity: 0, duration: 0.5, ease: 'circ.out' }, '<')
+    }
   }
 
   const clickPlanet = (event) => {
