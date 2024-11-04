@@ -122,14 +122,17 @@ export default function () {
     const infoBox = document.getElementById('info-box')
     const title = infoBox.querySelector('.title')
     const desc = infoBox.querySelector('.desc')
+    const img = infoBox.querySelector('.planet-img')
     infoBox.className = 'info-box'
     title.textContent = planetContent[planetName].title
     desc.textContent = planetContent[planetName].desc
-
+    img.src = `/assets/img/${planetName}.jpg`
+    img.setAttribute('alt', planetName)
     gsap
       .timeline()
       .from(title, { opacity: 0, y: 10, duration: 0.5, ease: 'circ.out', delay: 0.2 })
       .from(desc, { opacity: 0, y: 30, duration: 0.5, ease: 'circ.out' }, '<0.1')
+      .from(img, { opacity: 0, duration: 0.5, ease: 'circ.out' }, '<')
   }
 
   const clickPlanet = (event) => {

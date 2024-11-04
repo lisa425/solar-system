@@ -307,18 +307,39 @@ export const planetInfo = [
 
 export const planetContent = {
   sun: {
-    title: 'sun',
-    desc: 'The sun is a star that exists at the center of the solar system, and is the only star and source of energy in the solar system. Because of the sun, there can be a distinction between day and night, four seasons and climate, and life on Earth. The sun is a G-type main sequence star that is rare even in our galaxy, and thanks to this, it is a star bright enough to be seen with the naked eye even in Alpha Centaurus, which is four light years away.',
+    title: 'The Sun',
+    desc: "The Sun is the heart of our solar system, a massive star made of hot plasma that provides the light and warmth necessary for life on Earth. It contains about 99.8% of the solar system's total mass, holding planets, moons, asteroids, and comets in its gravitational grip.",
   },
   mercury: {
-    title: 'mercury',
-    desc: "Mercury is the closest orbiting planet in the solar system, an average of 58 million km from the sun. It is also the smallest inner planet with a radius of 2,440 km and a circumference of 43,924 km. Its orbital period is 88 days, its rotation period is 58 days, and its density is 5.427 g/cm3. It is estimated that the core accounts for more than 70% of Mercury's total radius and is mainly composed of iron. A mantle composed of silicates occupies the outside.\nThe surface has many collisions, similar to the moon, and there are huge cliffs that form when the planet contracts as it cools. There is an atmosphere composed of sodium and potassium, but the atmospheric pressure is one-trillionth of the Earth's, which is very thin. It was also found that there is a weak magnetic field. Because it is the closest planet to the sun, its orbit moves little by little every year under the influence of strong gravity.",
+    title: 'Mercury',
+    desc: "Mercury is the smallest and closest planet to the Sun. Its proximity results in extreme temperature changes, from scorching days to freezing nights. With no significant atmosphere, Mercury's surface is heavily cratered, resembling our Moon.",
   },
-  venus: { title: 'venus', desc: 'vvv' },
-  earth: { title: 'earth', desc: 'sss' },
-  mars: { title: 'mars', desc: ' hi' },
-  jupiter: { title: 'jupiter', desc: 'jususu' },
-  saturn: { title: 'saturn', desc: 'dhii' },
-  uranus: { title: 'uranus', desc: 'hi' },
-  neptune: { title: 'neptune', desc: 'nep' },
+  venus: {
+    title: 'Venus',
+    desc: "Venus is often called Earth's 'sister planet' due to its similar size and composition. However, its thick, toxic atmosphere traps heat, making Venus the hottest planet. Its surface is hidden under thick clouds, and its rotation is unique as it spins backward.",
+  },
+  earth: {
+    title: 'Earth',
+    desc: 'Earth is the only known planet to support life, thanks to its ideal climate, liquid water, and protective atmosphere. With diverse ecosystems, land, and oceans, Earth’s unique conditions allow countless species to thrive.',
+  },
+  mars: {
+    title: 'Mars',
+    desc: "Mars, known as the 'Red Planet' for its rusty surface, has been a focus of exploration due to its potential to support life. It has the largest volcano and canyon in the solar system and shows evidence of past water flows, sparking interest in its habitability.",
+  },
+  jupiter: {
+    title: 'Jupiter',
+    desc: 'Jupiter is the largest planet, a gas giant with swirling storms, including the famous Great Red Spot. It has more than 75 moons, and its massive magnetic field is the strongest in the solar system. Jupiter’s size and composition are more similar to a small star than a planet.',
+  },
+  saturn: {
+    title: 'Saturn',
+    desc: "Saturn is known for its stunning rings, made of ice and rock. As a gas giant, it’s the second-largest planet and has over 80 moons. Saturn's rings and majestic appearance make it a striking feature in the solar system.",
+  },
+  uranus: {
+    title: 'Uranus',
+    desc: 'Uranus is unique for its tilted axis, essentially rolling around the Sun. This icy giant has a blue-green color due to methane in its atmosphere and is mostly made of water, ammonia, and methane ices. It has a faint ring system and numerous moons.',
+  },
+  neptune: {
+    title: 'Neptune',
+    desc: 'Neptune, the farthest planet from the Sun, is a cold, dark world with supersonic winds. This ice giant is similar to Uranus in composition, featuring a striking deep blue color and a set of faint rings. Neptune’s largest moon, Triton, is one of the coldest objects in the solar system.',
+  },
 }
