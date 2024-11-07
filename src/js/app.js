@@ -13,13 +13,13 @@ export default function () {
   }
 
   loadingManager.onLoad = () => {
-    gsap.to('#wrapper', { opacity: 1, duration: 1, ease: 'elastic.out(1,1000)' })
     gsap.to('#loading-bar-container', {
       opacity: 0,
       duration: 0.5,
       ease: 'circ.out',
       onComplete: () => {
         document.getElementById('loading-bar-container').style.display = 'none'
+        introAnimation()
       },
     })
   }
@@ -195,20 +195,38 @@ export default function () {
   }
 
   const introAnimation = () => {
-    gsap.from(camera.position, {
-      y: 20,
-      x: 50,
-      z: 50,
-      duration: 8,
-      ease: 'elastic.out(1,10000)',
-    })
     gsap
       .timeline()
-      .from('.main-title h1', {
-        opacity: 0,
-        duration: 2,
-        y: 30,
-      })
+      .to(
+        '#wrapper',
+        {
+          opacity: 1,
+          duration: 1,
+          ease: 'elastic.out(1,1000)',
+        },
+        '<'
+      )
+
+      .from(
+        camera.position,
+        {
+          y: 20,
+          x: 50,
+          z: 50,
+          duration: 8,
+          ease: 'elastic.out(1,10000)',
+        },
+        '<'
+      )
+      .from(
+        '.main-title h1',
+        {
+          opacity: 0,
+          duration: 2,
+          y: 30,
+        },
+        '<0.4'
+      )
       .from(
         '.main-title p',
         {
@@ -225,7 +243,6 @@ export default function () {
     addEvent()
     resize()
     draw()
-    introAnimation()
   }
 
   initialize()
